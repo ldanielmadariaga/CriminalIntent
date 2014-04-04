@@ -25,30 +25,29 @@
 			<artifactId>support-v4</artifactId>
 			<version>r7</version>
 		</dependency>
-		<dependency>
-			<groupId>android.support</groupId>
-			<artifactId>compatibility-v7</artifactId>
-			<version>19.1.0</version>
-			<type>apklib</type>
-		</dependency>
 
 		<dependency>
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v7</artifactId>
-			<version>19.1.0</version>
+			<version>[19.0.1, 19.1.0]</version>
+			<type>apklib</type>
+		</dependency>
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v7</artifactId>
+			<version>[19.0.1, 19.1.0]</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v7-appcompat</artifactId>
-			<version>19.1.0</version>
+			<version>[19.0.1, 19.1.0]</version>
 			<type>apklib</type>
 		</dependency>
-
 		<dependency>
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v7-appcompat</artifactId>
-			<version>19.1.0</version>
+			<version>[19.0.1, 19.1.0]</version>
 			<type>jar</type>
 		</dependency>
 	</dependencies>

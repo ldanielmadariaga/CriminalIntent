@@ -3,12 +3,16 @@ package com.example.criminalintent.fragments;
 import java.util.Date;
 import java.util.UUID;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -48,9 +52,17 @@ public class CrimeFragment extends Fragment {
 		return crimeFragment;
 	}
 
+	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_crime_, parent, false);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			}
+		}
+		setHasOptionsMenu(true);
 
 		titleField = (EditText) view.findViewById(R.id.crime_title);
 		titleField.setText(crime.getTitle());
@@ -79,6 +91,24 @@ public class CrimeFragment extends Fragment {
 				updateDate();
 			}
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		boolean optionsItemSelected;
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			optionsItemSelected = true;
+			break;
+
+		default:
+			optionsItemSelected = super.onOptionsItemSelected(item);
+			break;
+		}
+		return optionsItemSelected;
 	}
 
 	private void updateDate() {

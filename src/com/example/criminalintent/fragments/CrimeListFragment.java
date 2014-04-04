@@ -2,13 +2,17 @@ package com.example.criminalintent.fragments;
 
 import java.util.ArrayList;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -21,6 +25,7 @@ import com.example.criminalintent.adapters.AdapterFactory;
 public class CrimeListFragment extends ListFragment {
 
 	private ArrayList<Crime> crimes;
+	private Boolean subtitleVisible;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,23 @@ public class CrimeListFragment extends ListFragment {
 
 		ArrayAdapter<Crime> arrayAdapter = AdapterFactory.getCrimeListAdapter(getActivity(), crimes);
 		setListAdapter(arrayAdapter);
+
+		setRetainInstance(true);
+		subtitleVisible = false;
+	}
+
+	@TargetApi(11)
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (subtitleVisible) {
+				getActivity().getActionBar().setSubtitle(R.string.show_subtitle);
+			}
+		}
+
+		return view;
 	}
 
 	@Override
@@ -48,6 +70,7 @@ public class CrimeListFragment extends ListFragment {
 		arrayAdapter.notifyDataSetChanged();
 	}
 
+	@TargetApi(11)
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		boolean optionsItemsSelected;
@@ -61,7 +84,17 @@ public class CrimeListFragment extends ListFragment {
 			startActivityForResult(intent, 0);
 			optionsItemsSelected = true;
 			break;
-
+		case R.id.menu_item_show_subtitle:
+			if (getActivity().getActionBar().getSubtitle() == null) {
+				getActivity().getActionBar().setSubtitle(R.string.show_subtitle);
+				subtitleVisible = true;
+				item.setTitle(R.string.hide_subtitle);
+			} else {
+				getActivity().getActionBar().setSubtitle(null);
+				subtitleVisible = false;
+				item.setTitle(R.string.show_subtitle);
+			}
+			optionsItemsSelected = true;
 		default:
 			optionsItemsSelected = super.onOptionsItemSelected(item);
 			break;

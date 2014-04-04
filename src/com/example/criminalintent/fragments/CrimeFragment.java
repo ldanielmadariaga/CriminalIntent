@@ -24,7 +24,7 @@ import com.example.criminalintent.listeners.ListenerFactory;
 public class CrimeFragment extends Fragment {
 
 	public static final String EXTRA_CRIME_ID = "com.example.criminalintent.crime_id";
-	private static final int REQUEST_DATE = 0;
+	public static final int REQUEST_DATE = 0;
 
 	private Crime crime;
 	private EditText titleField;

@@ -16,15 +16,15 @@ import com.example.criminalintent.Crime;
 
 public class ListenerFactory {
 
-	public static TextWatcher getCrimeTextChangeListener(final Crime crime) {
+	public static TextWatcher getCrimeTextChangeListener(Crime crime) {
 		return CrimeTextWatcher.getInstance(crime);
 	}
 
-	public static OnCheckedChangeListener getCrimeSolvedCheckboxListener(final Crime crime) {
+	public static OnCheckedChangeListener getCrimeSolvedCheckboxListener(Crime crime) {
 		return CrimeSolvedCheckBoxListener.getInstance(crime);
 	}
 
-	public static OnPageChangeListener getCrimesPageChangeListener(Context context, final ArrayList<Crime> crimes) {
+	public static OnPageChangeListener getCrimesPageChangeListener(Context context, ArrayList<Crime> crimes) {
 		return CrimesPageChangeListener.getInstance(context, crimes);
 	}
 

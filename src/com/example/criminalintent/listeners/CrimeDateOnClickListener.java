@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.example.criminalintent.fragments.CrimeFragment;
 import com.example.criminalintent.fragments.DatePickerFragment;
 
 class CrimeDateOnClickListener implements OnClickListener {
 
 	private static final String DIALOG_DATE = "date";
-	private static final int REQUEST_DATE = 0;
 
 	private FragmentManager fragmentManager;
 	private Fragment fragment;
@@ -31,7 +31,7 @@ class CrimeDateOnClickListener implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		DatePickerFragment dialog = DatePickerFragment.newInstance(crimeDate);
-		dialog.setTargetFragment(fragment, REQUEST_DATE);
+		dialog.setTargetFragment(fragment, CrimeFragment.REQUEST_DATE);
 		dialog.show(fragmentManager, DIALOG_DATE);
 	}
 }

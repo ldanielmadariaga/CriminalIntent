@@ -42,6 +42,7 @@ public class CrimePagerActivity extends FragmentActivity {
 	}
 
 	private void loadSelectedCrime() {
+
 		UUID crimeId = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
 		for (Crime crime : crimes) {
 			if (crime.getId().equals(crimeId)) {

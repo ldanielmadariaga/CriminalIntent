@@ -15,9 +15,7 @@ class CrimeSolvedCheckBoxListener implements OnCheckedChangeListener {
 	}
 
 	public static CrimeSolvedCheckBoxListener getInstance(Crime crime) {
-		if (crimeSolvedCheckBoxListener == null) {
-			crimeSolvedCheckBoxListener = new CrimeSolvedCheckBoxListener(crime);
-		}
+		crimeSolvedCheckBoxListener = new CrimeSolvedCheckBoxListener(crime);
 		return crimeSolvedCheckBoxListener;
 	}
 

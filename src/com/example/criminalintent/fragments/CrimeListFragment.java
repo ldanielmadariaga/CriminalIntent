@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,6 +25,7 @@ public class CrimeListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		getActivity().setTitle(R.string.crimes_title);
 		CrimeLab crimeLab = CrimeLab.getInstance(getActivity());
 		crimes = crimeLab.getCrimes();
@@ -31,11 +35,39 @@ public class CrimeListFragment extends ListFragment {
 	}
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.fragment_crime_list, menu);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<Crime> arrayAdapter = (ArrayAdapter<Crime>) getListAdapter();
 		arrayAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		boolean optionsItemsSelected;
+
+		switch (item.getItemId()) {
+		case R.id.menu_item_new_crime:
+			Crime crime = new Crime();
+			CrimeLab.getInstance(getActivity()).addCrime(crime);
+			Intent intent = new Intent(getActivity(), CrimePagerActivity.class);
+			intent.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
+			startActivityForResult(intent, 0);
+			optionsItemsSelected = true;
+			break;
+
+		default:
+			optionsItemsSelected = super.onOptionsItemSelected(item);
+			break;
+		}
+
+		return optionsItemsSelected;
 	}
 
 	@Override

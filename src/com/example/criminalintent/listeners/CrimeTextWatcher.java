@@ -15,9 +15,7 @@ class CrimeTextWatcher implements TextWatcher {
 	}
 
 	public static CrimeTextWatcher getInstance(Crime crime) {
-		if (crimeTextWatcher == null) {
-			crimeTextWatcher = new CrimeTextWatcher(crime);
-		}
+		crimeTextWatcher = new CrimeTextWatcher(crime);
 		return crimeTextWatcher;
 	}
 

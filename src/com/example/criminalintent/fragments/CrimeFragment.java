@@ -83,6 +83,12 @@ public class CrimeFragment extends Fragment {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		CrimeLab.getInstance(getActivity()).saveCrimes();
+	}
+
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == REQUEST_DATE) {
@@ -114,4 +120,5 @@ public class CrimeFragment extends Fragment {
 	private void updateDate() {
 		dateButton.setText(crime.getDate().toString());
 	}
+
 }

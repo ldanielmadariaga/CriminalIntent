@@ -2,17 +2,21 @@ package com.example.criminalintent.fragments;
 
 import java.util.ArrayList;
 
+import android.R.id;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -21,6 +25,7 @@ import com.example.criminalintent.CrimeLab;
 import com.example.criminalintent.R;
 import com.example.criminalintent.activities.CrimePagerActivity;
 import com.example.criminalintent.adapters.AdapterFactory;
+import com.example.criminalintent.listeners.ListenerFactory;
 
 public class CrimeListFragment extends ListFragment {
 
@@ -52,6 +57,13 @@ public class CrimeListFragment extends ListFragment {
 				getActivity().getActionBar().setSubtitle(R.string.show_subtitle);
 			}
 		}
+		ListView listView = (ListView) view.findViewById(id.list);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+			listView.setMultiChoiceModeListener(ListenerFactory.getCrimesMultiChoiceModeListener(this));
+		} else {
+			registerForContextMenu(listView);
+		}
 
 		return view;
 	}
@@ -63,11 +75,39 @@ public class CrimeListFragment extends ListFragment {
 	}
 
 	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		getActivity().getMenuInflater().inflate(R.menu.crime_list_item_context, menu);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<Crime> arrayAdapter = (ArrayAdapter<Crime>) getListAdapter();
 		arrayAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		Boolean isContextItemSelected = false;
+		AdapterContextMenuInfo adapterContextMenuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<Crime> crimeListAdapter = (ArrayAdapter<Crime>) getListAdapter();
+		int position = adapterContextMenuInfo.position;
+		Crime crime = crimeListAdapter.getItem(position);
+
+		switch (item.getItemId()) {
+		case R.id.menu_item_delete_crime:
+			CrimeLab.getInstance(getActivity()).deleteCrime(crime);
+			crimeListAdapter.notifyDataSetChanged();
+			isContextItemSelected = true;
+			break;
+		default:
+			isContextItemSelected = super.onContextItemSelected(item);
+			break;
+		}
+
+		return isContextItemSelected;
 	}
 
 	@TargetApi(11)

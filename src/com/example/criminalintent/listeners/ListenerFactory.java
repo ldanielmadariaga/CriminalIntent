@@ -7,8 +7,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextWatcher;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker.OnDateChangedListener;
 
@@ -40,5 +42,9 @@ public class ListenerFactory {
 
 	public static OnDateChangedListener getCrimeDateOnDateChangedListener(Bundle arguments) {
 		return CrimeDateOnDateChangedListener.getInstance(arguments);
+	}
+
+	public static MultiChoiceModeListener getCrimesMultiChoiceModeListener(ListFragment listFragment) {
+		return DeleteCrimesMultiChoiceModeListener.getInstance(listFragment);
 	}
 }

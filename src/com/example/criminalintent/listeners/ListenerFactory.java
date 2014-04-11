@@ -3,6 +3,7 @@ package com.example.criminalintent.listeners;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,5 +47,9 @@ public class ListenerFactory {
 
 	public static MultiChoiceModeListener getCrimesMultiChoiceModeListener(ListFragment listFragment) {
 		return DeleteCrimesMultiChoiceModeListener.getInstance(listFragment);
+	}
+
+	public static PictureButtonListener getPictureButtonListener(Activity activity) {
+		return PictureButtonListener.getInstance(activity);
 	}
 }

@@ -14,5 +14,12 @@
     <item name="menu_item_new_crime" type="id"/>
     <item name="menu_item_show_subtitle" type="id"/>
     <item name="menu_item_delete_crime" type="id"/>
+    <item name="crime_camera_surfaceView" type="id"/>
+    <item name="crime_camera_takePictureButton" type="id"/>
+    <item name="crime_imageButton" type="id"/>
+    <item name="crime_camera_progressContainer" type="id"/>
+    <item name="crime_imageView" type="id"/>
+    <item name="crime_suspectButton" type="id"/>
+    <item name="crime_reportButton" type="id"/>
 
 </resources>

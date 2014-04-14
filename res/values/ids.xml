@@ -21,5 +21,6 @@
     <item name="crime_imageView" type="id"/>
     <item name="crime_suspectButton" type="id"/>
     <item name="crime_reportButton" type="id"/>
+    <item name="detail_fragmentContainer" type="id"/>
 
 </resources>

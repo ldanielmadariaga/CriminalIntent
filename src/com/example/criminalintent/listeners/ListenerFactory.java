@@ -16,15 +16,16 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker.OnDateChangedListener;
 
 import com.example.criminalintent.Crime;
+import com.example.criminalintent.interfaces.Callbacks;
 
 public class ListenerFactory {
 
-	public static TextWatcher getCrimeTextChangeListener(Crime crime) {
-		return CrimeTextWatcher.getInstance(crime);
+	public static TextWatcher getCrimeTextChangeListener(Crime crime, Callbacks callbacks) {
+		return CrimeTextWatcher.getInstance(crime, callbacks);
 	}
 
-	public static OnCheckedChangeListener getCrimeSolvedCheckboxListener(Crime crime) {
-		return CrimeSolvedCheckBoxListener.getInstance(crime);
+	public static OnCheckedChangeListener getCrimeSolvedCheckboxListener(Crime crime, Callbacks callbacks) {
+		return CrimeSolvedCheckBoxListener.getInstance(crime, callbacks);
 	}
 
 	public static OnPageChangeListener getCrimesPageChangeListener(Context context, ArrayList<Crime> crimes) {

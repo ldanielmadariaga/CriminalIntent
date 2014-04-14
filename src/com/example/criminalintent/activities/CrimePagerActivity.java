@@ -15,9 +15,10 @@ import com.example.criminalintent.CrimeLab;
 import com.example.criminalintent.R;
 import com.example.criminalintent.adapters.AdapterFactory;
 import com.example.criminalintent.fragments.CrimeFragment;
+import com.example.criminalintent.interfaces.Callbacks;
 import com.example.criminalintent.listeners.ListenerFactory;
 
-public class CrimePagerActivity extends FragmentActivity {
+public class CrimePagerActivity extends FragmentActivity implements Callbacks {
 
 	private ViewPager viewPager;
 	private ArrayList<Crime> crimes;
@@ -51,5 +52,17 @@ public class CrimePagerActivity extends FragmentActivity {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void onCrimeSelected(Crime crime) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onCrimeUpdated(Crime crime) {
+		// TODO Auto-generated method stub
+
 	}
 }

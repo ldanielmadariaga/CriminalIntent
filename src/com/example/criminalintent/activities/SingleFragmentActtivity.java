@@ -14,8 +14,12 @@ public abstract class SingleFragmentActtivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment);
+		setContentView(getLayoutResourceId());
 		initializeFragments();
+	}
+
+	protected int getLayoutResourceId() {
+		return R.layout.activity_fragment;
 	}
 
 	private void initializeFragments() {
